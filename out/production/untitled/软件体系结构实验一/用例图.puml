@@ -1,0 +1,27 @@
+@startuml
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor 操作员 as Operator
+rectangle PC端软件 {
+  usecase (实时查看噪声信息) as UC1
+  usecase (分析历史噪声数据) as UC2
+  usecase (打印分析报告) as UC3
+}
+database 数据库服务器 {
+  usecase (存储噪声数据) as UC4
+  usecase (检索噪声数据) as UC5
+}
+
+Operator --> UC1 : 查看
+Operator --> UC2 : 分析
+Operator --> UC3 : 打印
+
+PC端软件 --> UC4 : 上传
+PC端软件 --> UC5 : 查询
+
+note right of Operator : 操作员可以\n实时查看和分析数据
+note right of PC端软件 : PC端软件负责\n数据的接收、分析和显示
+
+@enduml

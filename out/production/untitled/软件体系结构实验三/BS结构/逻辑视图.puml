@@ -1,0 +1,19 @@
+@startuml
+actor User
+node Browser {
+    [User Interface]
+}
+node Server {
+    [Web Server]
+    [Business Logic]
+    [Data Access]
+}
+database Database {
+    [Database ]
+}
+User -> [User Interface] : uses
+[User Interface] -> [Web Server] : sends request
+[Web Server] -> [Business Logic] : processes
+[Business Logic] -> [Data Access] : uses
+[Data Access] -> [Database] : accesses
+@enduml

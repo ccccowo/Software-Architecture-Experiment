@@ -1,0 +1,18 @@
+@startuml
+actor User
+node Client {
+    [User Interface]
+    [Business Logic]
+}
+node Server {
+    [Data Access]
+    [Business Logic]
+}
+database Database {
+    [Database ]
+}
+User -> [User Interface] : uses
+[User Interface] -> [Business Logic] : uses
+[Business Logic] -> [Data Access] : uses
+[Data Access] -> [Database] : accesses
+@enduml

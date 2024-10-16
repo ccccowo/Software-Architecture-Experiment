@@ -1,0 +1,31 @@
+@startuml
+
+actor Operator
+participant PCSoftware as PC端软件
+participant Collector as 采集单元
+participant Sensor as 声级计
+participant Database as 数据库服务器
+participant ReportGenerator as 报告生成器
+
+Operator -> PC端软件: 启动系统
+PC端软件 -> Collector: 请求启动数据采集
+Collector -> Sensor: 采集声音信息
+Sensor -> Collector: 返回声音数据
+Collector -> PC端软件: 通过串口发送数据
+PC端软件 -> Database: 上传数据
+Database -> PC端软件: 确认数据存储
+
+Operator -> PC端软件: 请求实时数据
+PC端软件 -> Operator: 显示实时噪声信息
+
+Operator -> PC端软件: 请求历史数据分析
+PC端软件 -> Database: 查询历史数据
+Database -> PC端软件: 返回历史数据
+PC端软件 -> ReportGenerator: 生成分析报告
+ReportGenerator -> PC端软件: 返回分析报告
+PC端软件 -> Operator: 显示分析报告
+Operator -> PC端软件: 请求打印报告
+PC端软件 -> ReportGenerator: 打印报告
+ReportGenerator -> Operator: 提供打印报告
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+
+node "采集单元节点" as CollectorNode {
+    folder "采集单元" as Collector {
+        [采集软件]
+    }
+    rectangle "声级计" as Sensor
+}
+
+node "PC端节点" as PCNode {
+    folder "PC端软件" as PCSoftware {
+        [数据分析模块]
+        [数据显示模块]
+        [报告生成器]
+        [串口通讯模块]
+    }
+    database "本地数据库" as LocalDB
+}
+
+node "服务器节点" as ServerNode {
+    database "数据库服务器" as ServerDB
+}
+
+'node "操作员工作站" as WorkstationNode {
+'   computer "操作员界面" as OperatorInterface
+'}
+
+Sensor --> Collector : 安装连接
+Collector --> PCNode : 串口通讯
+PCSoftware --> LocalDB : 数据存储
+PCSoftware --> ServerDB : 数据同步
+OperatorInterface --> ServerDB : 查询分析数据
+
+cloud "外部网络" as Network {
+    Network --> PCNode : 网络连接
+    Network --> WorkstationNode : 网络连接
+}
+
+@enduml
